@@ -4,12 +4,11 @@ import os
 import subprocess
 import sys
 
-bright = str(sys.argv[1])
-
-#os.system('xrandr > 83hfjnfkjsbnefgkjsnefk')
-#
-#with open('83hfjnfkjsbnefgkjsnefk', 'r') as f:
-#    out = f.read()
+try:
+    bright = str(sys.argv[1])
+except IndexError:
+    print 'Usage: ./brightness.py <0.1 - 1.0>'
+    exit(1) 
 
 out = subprocess.check_output('xrandr')
 
@@ -23,5 +22,3 @@ for line in out:
         break
 
 os.system('xrandr --output '+dp+' --brightness '+bright)
-
-#os.system('rm -f 83hfjnfkjsbnefgkjsnefk')
