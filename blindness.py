@@ -12,14 +12,13 @@ except IndexError:
     print 'Usage: ./brightness.py <0.1 - 1.0>'
     exit(1) 
 
-out = subprocess.check_output('xrandr').rstrip()
+out = subprocess.check_output('xrandr').splitlines()
 out = out[1:len(out)-1]
 
 # Seeks the connected display value
 for line in out:
-    cur = line.split()
-    if cur[1] == 'connected':
-        dp = cur[0]
+    if 'connected' in line.split():
+        dp = line.split()[0]
         break
 
 # Sets brightness
